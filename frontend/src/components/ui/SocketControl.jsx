@@ -20,7 +20,7 @@ const SocketControl = ({ name, value, id }) => {
           className="bg-blue-500 py-2 px-4 rounded-md text-white lg:w-[100px] flex-1 mr-3 hover:bg-blue-600"
           onClick={() => {
             setIsLoading(true);
-            postData("http://localhost:8000/data/update/controls", {
+            postData("https://power-energy-meter.vercel.app/data/update/controls", {
               id,
               socketData: "ON",
             })
@@ -43,7 +43,7 @@ const SocketControl = ({ name, value, id }) => {
           className="bg-blue-500 py-2 px-4 text-white  rounded-md lg:w-[100px] flex-1 hover:bg-blue-600"
           onClick={() => {
             setIsLoading(true);
-            postData("http://localhost:8000/data/update/controls", {
+            postData("https://power-energy-meter.vercel.app/data/update/controls", {
               id,
               socketData: "OFF",
             })
