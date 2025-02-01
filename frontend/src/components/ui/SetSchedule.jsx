@@ -29,7 +29,7 @@ const SetSchedule = ({ value, name }) => {
     if (validateTime(time)) {
       if (action || action == "ON") {
         setIsLoading(true);
-        postData("http://localhost:8000/data/update/timer", {
+        postData("https://power-energy-meter.vercel.app/data/update/timer", {
           socketName: name,
           time: time,
           action: action,
