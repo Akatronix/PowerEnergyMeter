@@ -60,6 +60,7 @@ async function updateSocketData(req, res) {
   const { data } = req.body;
   const { total } = req.body;
   const { tid } = total;
+  console.log(req.body);
 
   try {
     const updates = data.map(async (item) => {
