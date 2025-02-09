@@ -165,6 +165,7 @@ async function updateSocketData(req, res) {
       message: "Database updated successfully",
       controls: control,
       timers: timer,
+      socket: socket
     });
   } catch (error) {
     console.log("Error", error);
