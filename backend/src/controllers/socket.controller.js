@@ -5,6 +5,7 @@ const {
   InfoModel,
   EnergyModel,
 } = require("../models/Socket.model");
+const myData = require("../../data.js");
 
 // get all data route
 async function getAllSocketData(req, res) {
@@ -57,10 +58,75 @@ async function createSocket(req, res) {
 
 // update socket route
 async function updateSocketData(req, res) {
-  const { data } = req.body;
-  const { total } = req.body;
+  const myDataArray = myData()[0];
+  const {
+    Current1,
+    Current2,
+    Current3,
+    Current4,
+    Current5,
+    Voltage,
+    Energy1,
+    Energy2,
+    Energy3,
+    Energy4,
+    Energy5,
+    KiloWatt1,
+    KiloWatt2,
+    KiloWatt3,
+    KiloWatt4,
+    KiloWatt5,
+    TotalEnergy,
+  } = req.body;
+
+  // if (!Current1 || !Current2 || !Current3 || !Current4 || !Current5)
+  //   return res.status(400).send({ message: "all field is required" });
+
+  // if (!Energy1 || !Energy2 || !Energy3 || !Energy4 || !Energy5)
+  //   return res.status(400).send({ message: "all field is required" });
+
+  // if (!KiloWatt1 || !KiloWatt2 || !KiloWatt3 || !KiloWatt4 || !KiloWatt5)
+  //   return res.status(400).send({ message: "all field is required" });
+
+  // if (!Voltage || !TotalEnergy)
+  //   return res.status(400).send({ message: "all field is required" });
+
+  // first socket data
+  myDataArray.data[0].current = Current1 || myDataArray.data[0].current;
+  myDataArray.data[0].voltage = Voltage || myDataArray.data[0].voltage;
+  myDataArray.data[0].power = KiloWatt1 || myDataArray.data[0].power;
+  myDataArray.data[0].energy = Energy1 || myDataArray.data[0].energy;
+
+  // second socket data
+  myDataArray.data[1].current = Current2 || myDataArray.data[1].current;
+  myDataArray.data[1].voltage = Voltage || myDataArray.data[1].voltage;
+  myDataArray.data[1].power = KiloWatt2 || myDataArray.data[1].power;
+  myDataArray.data[1].energy = Energy2 || myDataArray.data[1].energy;
+
+  // third socket data
+  myDataArray.data[2].current = Current3 || myDataArray.data[2].current;
+  myDataArray.data[2].voltage = Voltage || myDataArray.data[2].voltage;
+  myDataArray.data[2].power = KiloWatt3 || myDataArray.data[2].power;
+  myDataArray.data[2].energy = Energy3 || myDataArray.data[2].energy;
+
+  // fourth socket data
+  myDataArray.data[3].current = Current4 || myDataArray.data[3].current;
+  myDataArray.data[3].voltage = Voltage || myDataArray.data[3].voltage;
+  myDataArray.data[3].power = KiloWatt4 || myDataArray.data[3].power;
+  myDataArray.data[3].energy = Energy4 || myDataArray.data[3].energy;
+
+  // fiveth socket data
+  myDataArray.data[4].current = Current5 || myDataArray.data[4].current;
+  myDataArray.data[4].voltage = Voltage || myDataArray.data[4].voltage;
+  myDataArray.data[4].power = KiloWatt5 || myDataArray.data[4].power;
+  myDataArray.data[4].energy = Energy5 || myDataArray.data[4].energy;
+
+  myDataArray.total.totalEnergy = TotalEnergy || myDataArray.total.totalEnergy;
+  console.log(myDataArray);
+
+  const { data } = myDataArray;
+  const { total } = myDataArray;
   const { tid } = total;
-  console.log(req.body);
 
   try {
     const updates = data.map(async (item) => {
@@ -131,8 +197,6 @@ async function updateControlData(req, res) {
 
   console.log(req.body);
   try {
-    // const id = await ControlModel.find({ socketName });
-    // console.log(id);
     const result = await ControlModel.findByIdAndUpdate(
       id,
       { ...data },
