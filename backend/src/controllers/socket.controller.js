@@ -56,6 +56,7 @@ async function createSocket(req, res) {
   }
 }
 
+
 // update socket route
 async function updateSocketData(req, res) {
   const myDataArray = myData()[0];
@@ -78,18 +79,6 @@ async function updateSocketData(req, res) {
     KiloWatt5,
     TotalEnergy,
   } = req.body;
-
-  // if (!Current1 || !Current2 || !Current3 || !Current4 || !Current5)
-  //   return res.status(400).send({ message: "all field is required" });
-
-  // if (!Energy1 || !Energy2 || !Energy3 || !Energy4 || !Energy5)
-  //   return res.status(400).send({ message: "all field is required" });
-
-  // if (!KiloWatt1 || !KiloWatt2 || !KiloWatt3 || !KiloWatt4 || !KiloWatt5)
-  //   return res.status(400).send({ message: "all field is required" });
-
-  // if (!Voltage || !TotalEnergy)
-  //   return res.status(400).send({ message: "all field is required" });
 
   // first socket data
   myDataArray.data[0].current = Current1 || myDataArray.data[0].current;
@@ -161,17 +150,32 @@ async function updateSocketData(req, res) {
     if (!newene)
       return res.status(404).send({ message: "can not find energy" });
 
+    const socketDataArray = control.map((item) => item.socketData);
+
+    const formattedTimers = timer.map((item) => {
+      let [hour, minute, second, period] = item.time.split(/[:\s]/);
+
+      return {
+        socketName: item.socketName,
+        hour,
+        minute,
+        second,
+        period,
+        action: item.action,
+      };
+    });
+
     res.status(200).json({
       message: "Database updated successfully",
-      controls: control,
-      timers: timer,
-      socket: socket
+      controls: socketDataArray,
+      timers: formattedTimers,
     });
   } catch (error) {
     console.log("Error", error);
     res.status(500).send({ error: error });
   }
 }
+
 
 // create control route
 async function createControlData(req, res) {
