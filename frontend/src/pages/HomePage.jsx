@@ -81,7 +81,7 @@ const HomePage = () => {
               Total Forwarded Energy
             </p>
             <p className="text-5xl font-bold">
-              {totalEnergy[0].totalEnergy}{" "}
+              {totalEnergy[0].totalEnergy==0?"0.00":totalEnergy[0].totalEnergy}{" "}
               <span className="text-base font-normal text-slate-500">KWh</span>
             </p>
           </div>
