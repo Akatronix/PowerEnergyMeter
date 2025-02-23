@@ -41,7 +41,7 @@ const HomePage = () => {
       energy: "0",
     },
   ]);
-  const [totalEnergy, setTotalEnergy] = useState([{ totalEnergy: "0" }]);
+  const [totalEnergy, setTotalEnergy] = useState([{ totalEnergy: "0.00" }]);
 
   const names = [
     "Socket One",
