@@ -50,7 +50,7 @@ module.exports = function myData() {
           socketfive: "ON",
         },
       },
-      total: { tid: "679d58af5af155c977dc7008", totalEnergy: "0" },
+      total: { tid: "679d58af5af155c977dc7008", totalEnergy: "0.00" },
     },
   ];
 };
